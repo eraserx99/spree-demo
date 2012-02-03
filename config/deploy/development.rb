@@ -1,7 +1,7 @@
 set :application, "spree"
 set :repository,  "git@github.com:eraserx99/spree-demo.git"
 set :deploy_to, "/var/www/#{application}"
-set :rails_env, "staging"
+set :rails_env, "development"
 set :user, "vagrant"
 set :group, "vagrant"
 set :use_sudo, false

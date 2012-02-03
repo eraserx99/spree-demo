@@ -24,7 +24,14 @@ namespace :deploy do
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
   end
+
+  desc "Bootstraping the database"
+  task :bootstrap_db,  :roles => :db, :only => { :primary => true } do
+    run "cd #{current_path} && " +
+      "#{rake} RAILS_ENV=#{rails_env} db:bootstrap AUTO_ACCEPT=1"
+  end
 end
+
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
