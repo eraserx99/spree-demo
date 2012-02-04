@@ -25,7 +25,7 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
  
-  name :db do
+  namespace :db do
     desc "Bootstraping the database"
     task :bootstrap,  :roles => :db, :only => { :primary => true } do
       run "cd #{current_path} && " +
