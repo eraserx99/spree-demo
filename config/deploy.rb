@@ -2,7 +2,7 @@ set :stages, %w(production staging qa demo development)
 set :default_stage, "demo"
 require 'capistrano/ext/multistage'
 
-# Instruct the Capistrano to respect rvm
+# Instruct the Capistrano to respect rvm and gemset
 set :default_environment, {
   'PATH' => "/usr/local/rvm/gems/ruby-1.9.3-p0@spree/bin:/usr/local/rvm/gems/ruby-1.9.3-p0@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p0/bin:/usr/local/rvm/bin:$PATH",
   'RUBY_VERSION' => 'ruby-1.9.3-p0',
@@ -24,11 +24,13 @@ namespace :deploy do
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
   end
-
-  desc "Bootstraping the database"
-  task :bootstrap_db,  :roles => :db, :only => { :primary => true } do
-    run "cd #{current_path} && " +
-      "#{rake} RAILS_ENV=#{rails_env} db:bootstrap AUTO_ACCEPT=1"
+ 
+  name :db do
+    desc "Bootstraping the database"
+    task :bootstrap,  :roles => :db, :only => { :primary => true } do
+      run "cd #{current_path} && " +
+        "#{rake} RAILS_ENV=#{rails_env} db:bootstrap AUTO_ACCEPT=1"
+    end
   end
 end
 
