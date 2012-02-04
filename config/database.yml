@@ -18,11 +18,11 @@ development:
   password: ironchef
   socket: /var/run/mysqld/mysqld.sock
 
-staging:
+integration:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: spree_staging
+  database: spree_integration
   pool: 5
   username: root
   password: ironchef

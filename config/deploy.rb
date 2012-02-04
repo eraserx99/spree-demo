@@ -1,5 +1,5 @@
-set :stages, %w(production staging qa development)
-set :default_stage, "development"
+set :stages, %w(production staging qa integration development)
+set :default_stage, "integration"
 require 'capistrano/ext/multistage'
 
 # Instruct the Capistrano to respect rvm
